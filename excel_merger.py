@@ -5,7 +5,7 @@
 #	- Otherwise, priority goes to earlier files in the args list
 
 print("Loading openpyxl...")
-import openpyxl, sys
+import copy, openpyxl, sys
 
 # ---------------------------------------------------------------------
 
@@ -57,10 +57,21 @@ def merge(workbooks, outfilename):
 			source = workbook.get_sheet_by_name(name)
 			for y in range(1, source.max_row + 1):
 				for x in range(1, source.max_column + 1):
-					source_cell = source.cell(row = y, column = x)
-					target_cell = target.cell(row = y, column = x)
-					if target_cell.value is None and source_cell.value is not None:
-						target_cell.value = source_cell.value
+					sc = source.cell(row = y, column = x)
+					tc = target.cell(row = y, column = x)
+					if tc.value is None and sc.value is not None:
+
+						tc.value = 			sc.value
+
+						# Dunno why copy is needed but it is...
+
+						tc.fill = 			copy.copy(sc.fill)
+						tc.font = 			copy.copy(sc.font)
+						tc.border = 		copy.copy(sc.border)
+						tc.fill = 			copy.copy(sc.fill)
+						tc.number_format = 	copy.copy(sc.number_format)
+						tc.protection = 	copy.copy(sc.protection)
+						tc.alignment = 		copy.copy(sc.alignment)
 
 	workbooks[0].save(outfilename)
 
