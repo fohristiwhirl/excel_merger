@@ -7,6 +7,8 @@
 print("Loading openpyxl...")
 import openpyxl, sys
 
+# ---------------------------------------------------------------------
+
 def main():
 
 	if len(sys.argv) < 2: # Allow a single file
@@ -28,6 +30,7 @@ def main():
 	print("Done.")
 	return
 
+# ---------------------------------------------------------------------
 
 def same_sheet_names(workbooks):
 
@@ -39,6 +42,7 @@ def same_sheet_names(workbooks):
 
 	return True
 
+# ---------------------------------------------------------------------
 
 def merge(workbooks, outfilename):
 
@@ -48,24 +52,18 @@ def merge(workbooks, outfilename):
 	sheet_names = workbooks[0].get_sheet_names()
 
 	for name in sheet_names:
-
 		target = workbooks[0].get_sheet_by_name(name)
-
 		for workbook in workbooks[1:]:
-
 			source = workbook.get_sheet_by_name(name)
-
 			for y in range(1, source.max_row + 1):
-
 				for x in range(1, source.max_column + 1):
-
 					source_cell = source.cell(row = y, column = x)
 					target_cell = target.cell(row = y, column = x)
-
 					if target_cell.value is None and source_cell.value is not None:
 						target_cell.value = source_cell.value
 
 	workbooks[0].save(outfilename)
 
+# ---------------------------------------------------------------------
 
 main()
