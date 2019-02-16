@@ -61,7 +61,7 @@ def merge(workbooks, outfilename):
 				for x in range(1, source.max_column + 1):
 					sc = source.cell(row = y, column = x)
 					tc = target.cell(row = y, column = x)
-					if tc.value is None and sc.value is not None:
+					if (tc.value is None or (type(tc.value) is str and tc.value.strip() == "")) and sc.value is not None:
 
 						tc.value = 			sc.value
 
