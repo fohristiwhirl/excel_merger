@@ -9,8 +9,8 @@ import openpyxl, sys
 
 def main():
 
-	if len(sys.argv) < 2:									# Allow a single file
-		print("Usage: merger.py <file1> <file2> <etc>")
+	if len(sys.argv) < 2: # Allow a single file
+		print("Usage: excel_merger.py <file1> <file2> <etc>")
 		return
 
 	workbooks = []
@@ -69,5 +69,3 @@ def merge(workbooks, outfilename):
 
 
 main()
-print("Press return to end.")
-input()
