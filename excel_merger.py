@@ -3,6 +3,8 @@
 #	- All files must have the same sheets
 #	- Cells with data take priority over empty cells
 #	- Otherwise, priority goes to earlier files in the args list
+#
+# Tested on openpyxl 2.6.0 (latest at time of writing)
 
 print("Loading openpyxl...")
 import copy, openpyxl, sys
