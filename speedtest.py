@@ -1,8 +1,6 @@
 import random, time
 import openpyxl
 
-# Make the example data file...
-
 print("Running test with tall rectangular data...")
 
 wb = openpyxl.Workbook()
@@ -33,7 +31,7 @@ for y in range(1, ws.max_row + 1):
 
 print("y-loop outer, time elapsed: {0:.2f} seconds".format(time.time() - start_time))
 
-
+# -----------------------------------------------------------------------------------
 
 print("Running test with wide rectangular data...")
 
