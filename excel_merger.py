@@ -6,8 +6,10 @@
 #
 # Tested on openpyxl 2.6.0 (latest at time of writing)
 
+import copy, sys, time
+start_time = time.time()
 print("Loading openpyxl...")
-import copy, openpyxl, sys
+import openpyxl
 
 # ---------------------------------------------------------------------
 
@@ -56,25 +58,26 @@ def merge(workbooks, outfilename):
 		target = workbooks[0].get_sheet_by_name(name)
 		for workbook in workbooks[1:]:
 			source = workbook.get_sheet_by_name(name)
-			for y in range(1, source.max_row + 1):
-				for x in range(1, source.max_column + 1):
-					sc = source.cell(row = y, column = x)
-					tc = target.cell(row = y, column = x)
-					if (tc.value is None or (type(tc.value) is str and tc.value.strip() == "")) and sc.value is not None:
+			for row in source.iter_cols():				# FIXME
+				for sc in row:
+					if sc.value is not None:
+						tc = target.cell(column = sc.column, row = sc.row)
+						if (tc.value is None or (type(tc.value) is str and tc.value.strip() == "")) and sc.value is not None:
 
-						tc.value = 			sc.value
+							tc.value = 			sc.value
 
-						# Dunno why copy is needed but it is...
-
-						tc.alignment = 		copy.copy(sc.alignment)
-						tc.border = 		copy.copy(sc.border)
-						tc.fill = 			copy.copy(sc.fill)
-						tc.font = 			copy.copy(sc.font)
-						tc.number_format = 	copy.copy(sc.number_format)
-						tc.protection = 	copy.copy(sc.protection)
-
+							# Dunno why copy is needed but it is...
+							'''
+							tc.alignment = 		copy.copy(sc.alignment)
+							tc.border = 		copy.copy(sc.border)
+							tc.fill = 			copy.copy(sc.fill)
+							tc.font = 			copy.copy(sc.font)
+							tc.number_format = 	copy.copy(sc.number_format)
+							tc.protection = 	copy.copy(sc.protection)
+							'''
 	workbooks[0].save(outfilename)
 
 # ---------------------------------------------------------------------
 
 main()
+print("Time elapsed: {0:.2f} seconds".format(time.time() - start_time))
