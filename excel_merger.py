@@ -59,10 +59,10 @@ def merge(workbooks, outfilename):
 		for workbook in workbooks[1:]:
 			source = workbook.get_sheet_by_name(name)
 			for row in source.iter_rows():
-				for sc in row:
+				for sc in row:						# sc: "source cell"
 					if sc.value is not None:
-						tc = target.cell(column = sc.column, row = sc.row)
-						if (tc.value is None or (type(tc.value) is str and tc.value.strip() == "")) and sc.value is not None:
+						tc = target.cell(column = sc.column, row = sc.row)		# tc: "target cell"
+						if tc.value is None or (type(tc.value) is str and tc.value.strip() == ""):
 
 							tc.value = 			sc.value
 
@@ -71,6 +71,12 @@ def merge(workbooks, outfilename):
 							# tc.alignment = 		copy.copy(sc.alignment)
 							# tc.fill = 			copy.copy(sc.fill)
 							# tc.font = 			copy.copy(sc.font)
+
+							# These are even less important:
+
+							# tc.border = 			copy.copy(sc.border)
+							# tc.number_format = 	copy.copy(sc.number_format)
+							# tc.protection = 		copy.copy(sc.protection)
 
 	workbooks[0].save(outfilename)
 
