@@ -58,7 +58,7 @@ def merge(workbooks, outfilename):
 		target = workbooks[0].get_sheet_by_name(name)
 		for workbook in workbooks[1:]:
 			source = workbook.get_sheet_by_name(name)
-			for row in source.iter_cols():				# FIXME
+			for row in source.iter_rows():
 				for sc in row:
 					if sc.value is not None:
 						tc = target.cell(column = sc.column, row = sc.row)
@@ -66,15 +66,12 @@ def merge(workbooks, outfilename):
 
 							tc.value = 			sc.value
 
-							# Dunno why copy is needed but it is...
-							'''
-							tc.alignment = 		copy.copy(sc.alignment)
-							tc.border = 		copy.copy(sc.border)
-							tc.fill = 			copy.copy(sc.fill)
-							tc.font = 			copy.copy(sc.font)
-							tc.number_format = 	copy.copy(sc.number_format)
-							tc.protection = 	copy.copy(sc.protection)
-							'''
+							# Dunno why copy is needed but it is... these also add to the time taken:
+
+							# tc.alignment = 		copy.copy(sc.alignment)
+							# tc.fill = 			copy.copy(sc.fill)
+							# tc.font = 			copy.copy(sc.font)
+
 	workbooks[0].save(outfilename)
 
 # ---------------------------------------------------------------------
