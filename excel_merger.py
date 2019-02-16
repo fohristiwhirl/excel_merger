@@ -49,7 +49,6 @@ def same_sheet_names(workbooks):
 def merge(workbooks, outfilename):
 
 	# Merge data into workbook 0 and then save it as a different filename
-	# FIXME: can we create a copy of workbook 0 instead??
 
 	sheet_names = workbooks[0].get_sheet_names()
 
