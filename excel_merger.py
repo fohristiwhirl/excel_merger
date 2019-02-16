@@ -65,13 +65,12 @@ def merge(workbooks, outfilename):
 
 						# Dunno why copy is needed but it is...
 
-						tc.fill = 			copy.copy(sc.fill)
-						tc.font = 			copy.copy(sc.font)
+						tc.alignment = 		copy.copy(sc.alignment)
 						tc.border = 		copy.copy(sc.border)
 						tc.fill = 			copy.copy(sc.fill)
+						tc.font = 			copy.copy(sc.font)
 						tc.number_format = 	copy.copy(sc.number_format)
 						tc.protection = 	copy.copy(sc.protection)
-						tc.alignment = 		copy.copy(sc.alignment)
 
 	workbooks[0].save(outfilename)
 
