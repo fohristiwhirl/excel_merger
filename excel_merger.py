@@ -58,10 +58,11 @@ def merge(workbooks, outfilename):
 		target = workbooks[0].get_sheet_by_name(name)
 		for workbook in workbooks[1:]:
 			source = workbook.get_sheet_by_name(name)
-			for row in source.iter_rows():
-				for sc in row:							# sc: "source cell"
+			for x in range(1, source.max_column + 1):
+				for y in range(1, source.max_row + 1):
+					sc = source.cell(column = x, row = y)
 					if sc.value is not None:
-						tc = target.cell(column = sc.column, row = sc.row)		# tc: "target cell"
+						tc = target.cell(column = x, row = y)
 						if tc.value is None or (type(tc.value) is str and tc.value.strip() == ""):
 
 							tc.value = sc.value
