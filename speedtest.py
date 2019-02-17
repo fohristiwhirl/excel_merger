@@ -1,6 +1,12 @@
 import random, time
 import openpyxl
 
+# Note: the speed problem turned out to be due to recalculation of either
+# max_column or max_row; regardless of column or row size, each recalculation
+# involves the library iterating over every cell; so ultimately the speed
+# depended on the size of the inner loop. If the inner loop was run 5000 times
+# then there would be ~5000 of these calculations.
+
 
 def main():
 
