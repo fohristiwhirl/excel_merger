@@ -30,7 +30,6 @@ def main():
 		return
 
 	merge(workbooks, "merged_output.xlsx")
-	print("Done.")
 	return
 
 # ---------------------------------------------------------------------
