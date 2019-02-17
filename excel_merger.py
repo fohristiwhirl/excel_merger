@@ -58,10 +58,8 @@ def merge(workbooks, outfilename):
 		target = workbooks[0].get_sheet_by_name(name)
 		for workbook in workbooks[1:]:
 			source = workbook.get_sheet_by_name(name)
-
-			max_column = source.max_column
-			max_row = source.max_row
-
+			max_column = source.max_column				# Caching these is potentially
+			max_row = source.max_row					# important for speed (tested)
 			for x in range(1, max_column + 1):
 				for y in range(1, max_row + 1):
 					sc = source.cell(column = x, row = y)
