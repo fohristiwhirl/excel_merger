@@ -29,7 +29,6 @@ def main():
 		print("Workbooks had different sheets")
 		return
 
-	print("Merging...")
 	merge(workbooks, "merged_output.xlsx")
 	print("Done.")
 	return
@@ -55,6 +54,7 @@ def merge(workbooks, outfilename):
 	sheet_names = workbooks[0].get_sheet_names()
 
 	for name in sheet_names:
+		print("Merging {}".format(name))
 		target = workbooks[0].get_sheet_by_name(name)
 		for workbook in workbooks[1:]:
 			source = workbook.get_sheet_by_name(name)
