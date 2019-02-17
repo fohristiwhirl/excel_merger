@@ -27,48 +27,32 @@ def test(ws, cache = True):
 	# Run the test one way...
 
 	start_time = time.time()
-	max_c_calcs = 0
-	max_r_calcs = 0
 
 	if cache:
 		for x in range(1, max_column + 1):
 			for y in range(1, max_row + 1):
 				cell = ws.cell(column = x, row = y)
 	else:
-
-		max_c_calcs += 1
 		for x in range(1, ws.max_column + 1):
-
-			max_r_calcs += 1
 			for y in range(1, ws.max_row + 1):
-
 				cell = ws.cell(column = x, row = y)
 
-	print("x-loop outer, time elapsed: {0:.2f} seconds, max_column ({1}): {2} calc, max_row ({3}): {4} calc".format(
-		time.time() - start_time, max_column, max_c_calcs, max_row, max_r_calcs))
+	print("{0} cycles of TOP to BOTTOM, {1} accesses per cycle, time elapsed: {2:.2f} seconds".format(x, y, time.time() - start_time))
 
 	# Run the test the other way...
 
 	start_time = time.time()
-	max_c_calcs = 0
-	max_r_calcs = 0
 
 	if cache:
 		for y in range(1, max_row + 1):
 			for x in range(1, max_column + 1):
 				cell = ws.cell(column = x, row = y)
 	else:
-
-		max_r_calcs += 1
 		for y in range(1, ws.max_row + 1):
-
-			max_c_calcs += 1
 			for x in range(1, ws.max_column + 1):
-
 				cell = ws.cell(column = x, row = y)
 
-	print("y-loop outer, time elapsed: {0:.2f} seconds, max_column ({1}): {2} calc, max_row ({3}): {4} calc".format(
-		time.time() - start_time, max_column, max_c_calcs, max_row, max_r_calcs))
+	print("{0} cycles of LEFT to RIGHT, {1} accesses per cycle, time elapsed: {2:.2f} seconds".format(y, x, time.time() - start_time))
 
 
 def populate(ws, width, height):
